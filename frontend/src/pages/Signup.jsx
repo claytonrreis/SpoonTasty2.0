@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
+import "../Styles/signup.css";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -47,33 +49,58 @@ const Signup = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        name="name" // Ensure this matches the backend field name
-        placeholder="Enter your name"
-        onChange={handleChange}
-      />
-      <input
-        type="text"
-        name="spoonerName" // Ensure this matches the backend field name
-        placeholder="Choose a Spooner Name"
-        onChange={handleChange}
-      />
-      <input
-        type="email"
-        name="email"
-        placeholder="Enter your Email"
-        onChange={handleChange}
-      />
-      <input
-        type="password"
-        name="password"
-        placeholder="Choose a Password"
-        onChange={handleChange}
-      />
-      <button type="submit">Sign Up</button>
-    </form>
+    <div className="Signup-container">
+      <h1>Sign Up</h1>
+      <h2>Welcome!</h2>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <input
+            type="text"
+            name="name"
+            placeholder="Enter your name"
+            required
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <input
+            type="text"
+            name="spoonerName"
+            placeholder="Choose a Spooner Name"
+            required
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter your Email"
+            required
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <input
+            type="password"
+            name="password"
+            placeholder="Choose a Password"
+            required
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group">
+          <input id="Terms" type="checkbox" required />
+          <label htmlFor="Terms">I accept the terms & conditions.</label>
+        </div>
+        <button type="submit">Sign Up</button>
+      </form>
+      {/* {error && <p className="error-message">{error}</p>}
+      {success && <p className="success-message">{success}</p>} */}
+      <p>
+        Already have an account? <Link to="/login">Log in here</Link>
+      </p>
+    </div>
   );
 };
 

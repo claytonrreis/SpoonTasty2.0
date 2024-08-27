@@ -1,54 +1,32 @@
-import React, { useState } from "react";
+import React from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const Logout = () => {
   const navigate = useNavigate();
 
-  //   const handleLogout = async () => {
-  //     try {
-  //       await axios.post(
-  //         "http://localhost:5932/api/spooners/logout",
-  //         {},
-  //         { withCredentials: true }
-  //       );
-  //       navigate("/");
-  //     } catch (error) {
-  //       console.error(error.response.data.message);
-  //     }
-  //   };
-
-  const [loading, setLoading] = useState(false);
-
   const handleLogout = async () => {
-    if (window.confirm("Are you sure you want to log out?")) {
-      setLoading(true);
-      try {
-        await axios.post(
-          "http://localhost:5932/api/spooners/logout",
-          {},
-          { withCredentials: true }
-        );
-        navigate("/");
-      } catch (error) {
-        console.error(
-          "Logout error:",
-          error.response ? error.response.data.message : error.message
-        );
-      } finally {
-        setLoading(false);
-      }
+    try {
+      await axios.post(
+        "http://localhost:5932/api/spooners/logout",
+        {},
+        {
+          withCredentials: true,
+        }
+      );
+      navigate("/login");
+    } catch (error) {
+      console.error(
+        "Logout error:",
+        error.response?.data?.message || error.message
+      );
+      alert(
+        error.response?.data?.message || "An error occurred during logout."
+      );
     }
   };
 
-  return (
-    <div>
-      {/* <button onClick={handleLogout}>Logout</button>; */}
-      <button onClick={handleLogout} disabled={loading}>
-        {loading ? "Logging out..." : "Logout"}
-      </button>
-    </div>
-  );
+  return <button onClick={handleLogout}>Logout</button>;
 };
 
 export default Logout;

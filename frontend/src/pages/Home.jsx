@@ -7,7 +7,7 @@ import Signup from "./Signup";
 function Home() {
   return (
     <div>
-      {/* <NavBar /> */}
+      <NavBar />
       Home
       <br />
       <Link to="/login">Login</Link>

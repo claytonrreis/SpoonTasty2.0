@@ -325,7 +325,7 @@ router.post("/login", async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "Strict",
+      sameSite: "None",
     });
     console.log(token);
 
@@ -355,7 +355,7 @@ router.post("/logout", (req, res) => {
 // Middleware to protect the following routes
 router.use(auth);
 
-router.get("/profile", async (req, res) => {
+router.get("/profile", auth, async (req, res) => {
   try {
     const spoonerId = req.spooner.id;
     const spooner = await Spooner.findById(spoonerId).select("-password");
@@ -372,7 +372,7 @@ router.get("/profile", async (req, res) => {
 });
 
 //update spooner profiles
-router.put("/profile", async (req, res) => {
+router.put("/profile", auth, async (req, res) => {
   try {
     const spoonerId = req.spooner.id;
     const { name, email, newPassword } = req.body;
@@ -396,7 +396,7 @@ router.put("/profile", async (req, res) => {
 });
 
 // Delete Account
-router.delete("/delete-account", async (req, res) => {
+router.delete("/delete-account", auth, async (req, res) => {
   try {
     const spoonerId = req.spooner.id;
     await Spooner.findByIdAndDelete(spoonerId);
@@ -409,7 +409,7 @@ router.delete("/delete-account", async (req, res) => {
 });
 
 //create grocery List
-router.post("/grocery-lists/create", async (req, res) => {
+router.post("/grocery-lists/create", auth, async (req, res) => {
   try {
     const { listName, items } = req.body;
     const spoonerId = req.spooner.id;
@@ -441,7 +441,7 @@ router.post("/grocery-lists/create", async (req, res) => {
   }
 });
 
-router.get("/grocery-lists", async (req, res) => {
+router.get("/grocery-lists", auth, async (req, res) => {
   try {
     const spooner = await Spooner.findById(req.spooner.id).populate(
       "groceryLists"
@@ -458,7 +458,7 @@ router.get("/grocery-lists", async (req, res) => {
   }
 });
 
-router.put("/grocery-lists/:id", async (req, res) => {
+router.put("/grocery-lists/:id", auth, async (req, res) => {
   try {
     const { listName, items } = req.body;
     const { id } = req.params;
@@ -480,7 +480,7 @@ router.put("/grocery-lists/:id", async (req, res) => {
   }
 });
 
-router.delete("/grocery-lists/:id", async (req, res) => {
+router.delete("/grocery-lists/:id", auth, async (req, res) => {
   try {
     const listId = req.params.id;
     const result = await GroceryList.findByIdAndDelete(listId);

@@ -3,6 +3,8 @@ import axios from "axios";
 import UpdateGroceryList from "./UpdateGroceryList";
 import "../Styles/grocery-list.css";
 
+axios.defaults.withCredentials = true; // change to test render
+
 const GroceryList = () => {
   const [groceryLists, setGroceryLists] = useState([]);
   const [error, setError] = useState(null);

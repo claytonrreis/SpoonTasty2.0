@@ -29,9 +29,8 @@ const Logout = () => {
   // return <button onClick={handleLogout}>Logout</button>;
   // return <p onClick={handleLogout}>Logout</p>;
   return (
-    <a>
-      <i onClick={handleLogout} class="fa fa-sign-out" aria-hidden="true"></i>{" "}
-      Logout
+    <a onClick={handleLogout}>
+      <i class="fa fa-sign-out" aria-hidden="true"></i> Logout
     </a>
   );
 };

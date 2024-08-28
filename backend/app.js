@@ -14,14 +14,14 @@ const app = express();
 //   credentials: true,
 // })
 
-// cors({
-//   origin: "https://spoontasty2-0-1.onrender.com",
-//   credentials: true,
-// });
-
 cors({
+  origin: "https://spoontasty2-0-1.onrender.com",
   credentials: true,
 });
+
+// cors({
+//   credentials: true,
+// });
 
 app.use(express.json());
 app.use(cookieParser());

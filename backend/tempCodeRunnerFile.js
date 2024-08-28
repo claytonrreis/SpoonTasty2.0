@@ -8,9 +8,15 @@ require("dotenv").config();
 
 const app = express();
 
+// app.use(
+//   cors({
+//     origin: "http://localhost:5173",
+//     credentials: true,
+//   })
+// );
 app.use(
   cors({
-    origin: "http://localhost:5173", // Replace with your frontend URL
+    origin: "https://spoontasty2-0-1.onrender.com",
     credentials: true,
   })
 );

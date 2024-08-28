@@ -1,74 +1,3 @@
-// import React, { useState, useEffect } from "react";
-// import axios from "axios";
-// import { Link, useNavigate } from "react-router-dom";
-// import DeleteAccount from "./DeleteAccount";
-// import NBLogged from "../Componets/NBLogged/NBLogged";
-
-// const Profile = () => {
-//   const [formData, setFormData] = useState({
-//     name: "",
-//     email: "",
-//     newPassword: "",
-//   });
-//   const [error, setError] = useState(null);
-//   const navigate = useNavigate();
-
-//   const handleChange = (e) =>
-//     setFormData({ ...formData, [e.target.name]: e.target.value });
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     try {
-//       await axios.put("http://localhost:5932/api/spooners/profile", formData);
-//       alert("Profile updated successfully");
-//     } catch (error) {
-//       if (error.response && error.response.status === 401) {
-//         alert("Session expired. Please log in again.");
-//         navigate("/login");
-//       } else {
-//         setError(error.response ? error.response.data.message : error.message);
-//       }
-//     }
-//   };
-
-//   return (
-//     <div>
-//       <NBLogged />
-//       <div>
-//         <Link to="/dashboard">Dashboard</Link>
-//         <form onSubmit={handleSubmit}>
-//           <input
-//             type="text"
-//             name="name"
-//             placeholder="New name"
-//             value={formData.name}
-//             onChange={handleChange}
-//           />
-//           <input
-//             type="email"
-//             name="email"
-//             placeholder="New Email"
-//             value={formData.email}
-//             onChange={handleChange}
-//           />
-//           <input
-//             type="password"
-//             name="newPassword"
-//             placeholder="New Password"
-//             value={formData.newPassword}
-//             onChange={handleChange}
-//           />
-//           <button type="submit">Update Profile</button>
-//           {error && <p style={{ color: "red" }}>{error}</p>}
-//         </form>
-//         <DeleteAccount />
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Profile;
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
@@ -102,7 +31,7 @@ const Profile = () => {
           name: response.data.name,
           email: response.data.email,
         });
-        // Initialize formData with empty values or default values
+
         setFormData({
           name: "",
           email: "",
@@ -133,7 +62,7 @@ const Profile = () => {
         withCredentials: true,
       });
       alert("Profile updated successfully");
-      // Optionally fetch and update userData again after successful update
+
       const response = await axios.get(
         "http://localhost:5932/api/spooners/profile",
         {
@@ -144,7 +73,7 @@ const Profile = () => {
         name: response.data.name,
         email: response.data.email,
       });
-      // Clear formData after submission
+
       setFormData({
         name: "",
         email: "",

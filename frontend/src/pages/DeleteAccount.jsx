@@ -14,9 +14,9 @@ const DeleteAccount = () => {
       try {
         await axios.delete(
           "http://localhost:5932/api/spooners/delete-account",
-          { withCredentials: true } // Ensure cookies are included in the request
+          { withCredentials: true }
         );
-        navigate("/login"); // Redirect to login page after deletion
+        navigate("/login");
       } catch (error) {
         console.error(
           "Delete account error:",

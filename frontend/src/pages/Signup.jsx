@@ -48,39 +48,12 @@ const Signup = () => {
         alert("An unexpected error occurred.");
       }
     }
-    //   const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     try {
-    //       await axios.post("/api/spooners/register", formData, {
-    //         headers: {
-    //           "Content-Type": "application/json",
-    //         },
-    //       });
-    //       alert("Registered successfully");
-    //       navigate("/login");
-    //     } catch (error) {
-    //       if (error.response) {
-    //         console.error(
-    //           "Error:",
-    //           error.response.data.message || "An error occurred"
-    //         );
-    //         alert(
-    //           error.response.data.message ||
-    //             "An error occurred during registration."
-    //         );
-    //       } else if (error.request) {
-    //         console.error("Error Request:", error.request);
-    //         alert("No response received from the server.");
-    //       } else {
-    //         console.error("Error Message:", error.message);
-    //         alert("An unexpected error occurred.");
-    //       }
-    //     }
   };
 
   return (
     <div>
       <NavBar />
+      <br />
       <div className="Signup-container">
         <h1>Sign Up</h1>
         <h2>Welcome!</h2>

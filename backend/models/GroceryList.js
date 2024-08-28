@@ -1,3 +1,50 @@
+// const mongoose = require("mongoose");
+// const Schema = mongoose.Schema;
+
+// const itemSchema = new Schema({
+//   name: {
+//     type: String,
+//     required: true,
+//   },
+//   quantity: {
+//     type: Number,
+//     required: true,
+//   },
+//   unit: {
+//     type: String,
+//     default: "unit", // You can adjust this to suit your needs, e.g., 'kg', 'liters'
+//   },
+//   purchased: {
+//     type: Boolean,
+//     default: false,
+//   },
+// });
+
+// const groceryListSchema = new Schema({
+//   listName: {
+//     type: String,
+//     required: true,
+//   },
+//   items: [itemSchema],
+//   spoonerName: {
+//     type: String,
+//     required: true,
+//   },
+//   createdAt: {
+//     type: Date,
+//     default: Date.now,
+//   },
+//   updatedAt: {
+//     type: Date,
+//     default: Date.now,
+//   },
+// });
+
+// const GroceryList = mongoose.model("GroceryList", groceryListSchema);
+
+// module.exports = GroceryList;
+
+// models/GroceryList.js
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
@@ -12,7 +59,7 @@ const itemSchema = new Schema({
   },
   unit: {
     type: String,
-    default: "unit", // You can adjust this to suit your needs, e.g., 'kg', 'liters'
+    default: "unit",
   },
   purchased: {
     type: Boolean,
@@ -26,10 +73,6 @@ const groceryListSchema = new Schema({
     required: true,
   },
   items: [itemSchema],
-  spoonerName: {
-    type: String,
-    required: true,
-  },
   createdAt: {
     type: Date,
     default: Date.now,

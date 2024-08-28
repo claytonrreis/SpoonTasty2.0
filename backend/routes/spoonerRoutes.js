@@ -217,6 +217,7 @@
 const express = require("express");
 const Spooner = require("../models/Spooner");
 const router = express.Router();
+const GroceryList = require("../models/GroceryList");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const auth = require("../auth");
@@ -334,6 +335,7 @@ router.post("/login", async (req, res) => {
       secure: process.env.NODE_ENV === "production",
       sameSite: "Strict",
     });
+    console.log(token);
 
     res.status(200).json({ message: "Logged in successfully" });
   } catch (error) {
@@ -360,8 +362,8 @@ router.use(auth);
 // });
 router.get("/profile", auth, async (req, res) => {
   try {
-    const spoonerId = req.spooner.id; // Extract user ID from the authenticated request
-    const spooner = await Spooner.findById(spoonerId).select("-password"); // Exclude the password field
+    const spoonerId = req.spooner.id;
+    const spooner = await Spooner.findById(spoonerId).select("-password");
 
     if (!spooner) {
       return res.status(404).json({ message: "Spooner not found" });
@@ -402,10 +404,10 @@ router.post("/logout", (req, res) => {
   try {
     res.clearCookie("token", {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production", // Ensure this is true in production
-      sameSite: "None", // Adjust as needed
-      domain: ".example.com", // Adjust to your domain
-      path: "/", // Ensure this path matches
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "None",
+      domain: ".example.com",
+      path: "/",
     });
     res.status(200).json({ message: "Logged out successfully" });
   } catch (error) {
@@ -417,13 +419,104 @@ router.post("/logout", (req, res) => {
 // Delete Account
 router.delete("/delete-account", async (req, res) => {
   try {
-    const spoonerId = req.spooner.id; // Extract user ID from the authenticated request
+    const spoonerId = req.spooner.id;
     await Spooner.findByIdAndDelete(spoonerId);
-    res.clearCookie("token"); // Clear the authentication cookie
+    res.clearCookie("token");
     res.status(200).json({ message: "Account deleted successfully" });
   } catch (error) {
-    console.error(error); // Log the error for debugging
+    console.error(error);
     res.status(500).json({ message: error.message });
+  }
+});
+
+router.post("/grocery-lists/create", auth, async (req, res) => {
+  try {
+    const { listName, items } = req.body;
+    const spoonerId = req.spooner.id; // Get the authenticated user's ID
+
+    // Create a new grocery list
+    const newGroceryList = new GroceryList({
+      listName,
+      items,
+    });
+
+    // Save the grocery list to the database
+    await newGroceryList.save();
+
+    // Find the spooner and add the new grocery list to their groceryLists array
+    const spooner = await Spooner.findById(spoonerId);
+    if (!spooner) {
+      return res.status(404).json({ message: "Spooner not found" });
+    }
+
+    // Add the grocery list to the spooner's groceryLists array
+    spooner.groceryLists.push(newGroceryList._id);
+    await spooner.save();
+
+    res.status(201).json({
+      message: "Grocery list created and associated successfully",
+      newGroceryList,
+    });
+  } catch (error) {
+    console.error("Error creating grocery list:", error);
+    res
+      .status(500)
+      .json({ message: "An error occurred while creating the grocery list" });
+  }
+});
+
+router.get("/grocery-lists", auth, async (req, res) => {
+  try {
+    const spooner = await Spooner.findById(req.spooner.id).populate(
+      "groceryLists"
+    );
+    if (!spooner) {
+      return res.status(404).json({ message: "Spooner not found" });
+    }
+    res.json(spooner.groceryLists);
+  } catch (error) {
+    console.error("Error fetching grocery lists:", error);
+    res
+      .status(500)
+      .json({ message: "An error occurred while fetching grocery lists" });
+  }
+});
+
+router.put("/grocery-lists/:id", async (req, res) => {
+  try {
+    const { listName, items } = req.body;
+    const { id } = req.params;
+
+    // Find the list by ID and update
+    const groceryList = await GroceryList.findByIdAndUpdate(
+      id,
+      { listName, items },
+      { new: true }
+    );
+
+    if (!groceryList) {
+      return res.status(404).json({ message: "Grocery list not found" });
+    }
+
+    res.status(200).json(groceryList);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+router.delete("/grocery-lists/:id", async (req, res) => {
+  try {
+    const listId = req.params.id;
+    const result = await GroceryList.findByIdAndDelete(listId);
+
+    if (!result) {
+      return res.status(404).json({ message: "Grocery list not found" });
+    }
+
+    res.status(200).json({ message: "Grocery list deleted successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
   }
 });
 

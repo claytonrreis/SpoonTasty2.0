@@ -16,24 +16,19 @@
 //   ],
 // });
 
-// spoonerSchema.pre("save", async function (next) {
-//   if (!this.isModified("password")) return next();
-//   const salt = await bcrypt.genSalt(10);
-//   this.password = await bcrypt.hash(this.password, salt);
-//   next();
-// });
-
+// // Method to check password
 // spoonerSchema.methods.matchPassword = async function (password) {
 //   return await bcrypt.compare(password, this.password);
 // };
 
+// // Method to generate a JWT token
 // spoonerSchema.methods.generateToken = function () {
 //   return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
 //     expiresIn: "1h",
 //   });
 // };
 
-// module.exports = mongoose.model("User", spoonerSchema);
+// module.exports = mongoose.model("Spooner", spoonerSchema);
 
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
@@ -52,14 +47,6 @@ const spoonerSchema = new mongoose.Schema({
     },
   ],
 });
-
-// // Hash password before saving if it's new or modified
-// spoonerSchema.pre("save", async function (next) {
-//   if (!this.isModified("password")) return next();
-//   const salt = await bcrypt.genSalt(10);
-//   this.password = await bcrypt.hash(this.password, salt);
-//   next();
-// });
 
 // Method to check password
 spoonerSchema.methods.matchPassword = async function (password) {

@@ -11,26 +11,10 @@ const Login = () => {
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  //   const handleSubmit = async (e) => {
-  //     e.preventDefault();
-  //     try {
-  //       console.log("Submitting login with data:", formData); // Debug form data
-  //       await axios.post("http://localhost:5932/api/spooners/login", formData, {
-  //         withCredentials: true,
-  //       });
-  //       navigate("/dashboard");
-  //     } catch (error) {
-  //       console.error(
-  //         "Login error:",
-  //         error.response?.data?.message || error.message
-  //       );
-  //       alert(error.response?.data?.message || "An error occurred during login.");
-  //     }
-  //   };
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log("Submitting login with data:", formData); // Debug form data
+      console.log("Submitting login with data:", formData);
       const response = await axios.post(
         "http://localhost:5932/api/spooners/login",
         formData,
@@ -38,7 +22,7 @@ const Login = () => {
           withCredentials: true,
         }
       );
-      console.log("Login response:", response.data); // Debug response
+      console.log("Login response:", response.data);
       navigate("/dashboard");
     } catch (error) {
       console.error(
@@ -52,6 +36,7 @@ const Login = () => {
   return (
     <div>
       <NavBar />
+      <br />
       <div className="Login-container">
         <h1>Login</h1>
         <h2>Welcome back!</h2>

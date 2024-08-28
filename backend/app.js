@@ -13,8 +13,13 @@ const app = express();
 //   origin: "http://localhost:5173",
 //   credentials: true,
 // })
+
+// cors({
+//   origin: "https://spoontasty2-0-1.onrender.com",
+//   credentials: true,
+// });
+
 cors({
-  origin: "https://spoontasty2-0-1.onrender.com",
   credentials: true,
 });
 

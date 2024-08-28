@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "../Styles/delete-account.css";
 
 const DeleteAccount = () => {
   const navigate = useNavigate();
@@ -26,7 +27,11 @@ const DeleteAccount = () => {
     }
   };
 
-  return <button onClick={handleDeleteAccount}>Delete Account</button>;
+  return (
+    <button className="DeleteAccount-button" onClick={handleDeleteAccount}>
+      Delete Account
+    </button>
+  );
 };
 
 export default DeleteAccount;

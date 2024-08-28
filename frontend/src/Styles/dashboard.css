@@ -18,6 +18,9 @@
   font-size: 1.5em;
   margin-bottom: 15px;
 }
+.Dashboard-container p {
+  text-align: justify;
+}
 
 .Dashboard-container a {
   color: #fff;

@@ -25,13 +25,13 @@ function NavBar() {
               </Link>
             </li>
             <li>
-              <Link to="#" onClick={() => setOpen(false)}>
+              <Link to="/spoonerglist" onClick={() => setOpen(false)}>
                 Grocery Lists
               </Link>
             </li>
             <li>
-              <Link to="#" onClick={() => setOpen(false)}>
-                Recepes
+              <Link to="/recipes" onClick={() => setOpen(false)}>
+                Recipes
               </Link>
             </li>
             <li>

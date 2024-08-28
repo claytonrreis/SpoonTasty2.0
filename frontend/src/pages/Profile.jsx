@@ -92,9 +92,8 @@ const Profile = () => {
   return (
     <div>
       <NBLogged />
-      <div>
-        <Link to="/dashboard">Dashboard</Link>
-
+      <br />
+      <div className="Profile-container">
         <h1>Profile Information</h1>
         <div className="profile-info">
           <p>

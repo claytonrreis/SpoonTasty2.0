@@ -9,6 +9,8 @@ import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import Home from "./pages/Home";
 import About from "./pages/About";
+import SpoonerGLists from "./pages/SpoonerGLists";
+import Recipes from "./pages/Recipes";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/spoonerglist" element={<SpoonerGLists />} />
+          <Route path="/recipes" element={<Recipes />} />
           <Route path="/profile" element={<Profile />} />
         </Routes>
         <Footer />

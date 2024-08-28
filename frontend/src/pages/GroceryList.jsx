@@ -13,7 +13,7 @@ const GroceryList = () => {
     const fetchGroceryLists = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5932/api/spooners/grocery-lists",
+          "https://spoontasty2-0.onrender.com/api/spooners/grocery-lists",
           { withCredentials: true }
         );
         setGroceryLists(response.data);
@@ -42,7 +42,7 @@ const GroceryList = () => {
     if (confirmDelete) {
       try {
         await axios.delete(
-          `http://localhost:5932/api/spooners/grocery-lists/${listId}`,
+          `https://spoontasty2-0.onrender.com/api/spooners/grocery-lists/${listId}`,
           { withCredentials: true }
         );
         setGroceryLists(groceryLists.filter((list) => list._id !== listId));

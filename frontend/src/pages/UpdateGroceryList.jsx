@@ -21,7 +21,7 @@
 //     e.preventDefault();
 //     try {
 //       await axios.put(
-//         `http://localhost:5932/api/spooners/grocery-lists/${list._id}`,
+//         `https://spoontasty2-0.onrender.com/api/spooners/grocery-lists/${list._id}`,
 //         { listName, items },
 //         { withCredentials: true }
 //       );
@@ -111,7 +111,7 @@ const UpdateGroceryList = ({ list, onClose, onUpdate }) => {
     e.preventDefault();
     try {
       await axios.put(
-        `http://localhost:5932/api/spooners/grocery-lists/${list._id}`,
+        `https://spoontasty2-0.onrender.com/api/spooners/grocery-lists/${list._id}`,
         { listName, items },
         { withCredentials: true }
       );

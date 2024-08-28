@@ -22,7 +22,7 @@ const GroceryForm = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5932/api/spooners/grocery-lists/create",
+        "https://spoontasty2-0.onrender.com/api/spooners/grocery-lists/create",
         { listName, items },
         { withCredentials: true }
       );

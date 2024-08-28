@@ -14,7 +14,7 @@ const DeleteAccount = () => {
     ) {
       try {
         await axios.delete(
-          "http://localhost:5932/api/spooners/delete-account",
+          "https://spoontasty2-0.onrender.com/api/spooners/delete-account",
           { withCredentials: true }
         );
         navigate("/login");

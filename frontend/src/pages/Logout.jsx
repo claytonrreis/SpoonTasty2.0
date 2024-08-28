@@ -8,7 +8,7 @@ const Logout = () => {
   const handleLogout = async () => {
     try {
       await axios.post(
-        "http://localhost:5932/api/spooners/logout",
+        "https://spoontasty2-0.onrender.com/api/spooners/logout",
         {},
         {
           withCredentials: true,

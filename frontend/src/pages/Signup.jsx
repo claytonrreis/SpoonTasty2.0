@@ -20,7 +20,7 @@ const Signup = () => {
     e.preventDefault();
     try {
       await axios.post(
-        "http://localhost:5932/api/spooners/register",
+        "https://spoontasty2-0.onrender.com/api/spooners/register",
         formData,
         {
           headers: {

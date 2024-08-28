@@ -22,7 +22,7 @@ const Profile = () => {
     const fetchProfile = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5932/api/spooners/profile",
+          "https://spoontasty2-0.onrender.com/api/spooners/profile",
           {
             withCredentials: true,
           }
@@ -58,13 +58,17 @@ const Profile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put("http://localhost:5932/api/spooners/profile", formData, {
-        withCredentials: true,
-      });
+      await axios.put(
+        "https://spoontasty2-0.onrender.com/api/spooners/profile",
+        formData,
+        {
+          withCredentials: true,
+        }
+      );
       alert("Profile updated successfully");
 
       const response = await axios.get(
-        "http://localhost:5932/api/spooners/profile",
+        "https://spoontasty2-0.onrender.com/api/spooners/profile",
         {
           withCredentials: true,
         }

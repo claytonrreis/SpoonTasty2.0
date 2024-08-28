@@ -7,12 +7,12 @@ require("dotenv").config();
 
 const app = express();
 
-app.use(cors());
-
 // cors({
 //   origin: "http://localhost:5173",
 //   credentials: true,
 // })
+
+// app.use(cors());
 
 // cors({
 //   origin: "https://spoontasty2-0-1.onrender.com",
@@ -22,6 +22,16 @@ app.use(cors());
 // cors({
 //   credentials: true,
 // });
+
+app.use(
+  cors({
+    origin: "https://spoontasty2-0-1.onrender.com",
+
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 app.use(cookieParser());

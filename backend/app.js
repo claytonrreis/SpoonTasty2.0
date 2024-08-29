@@ -52,10 +52,18 @@ app.use(
     target: "https://www.themealdb.com",
     changeOrigin: true,
     pathRewrite: {
-      "^/api/meals": "/api/json/v1/1", // Adjust the path as needed
+      "^/api/meals": "/api/json/v1/1",
+    },
+    onProxyReq: (proxyReq, req, res) => {
+      console.log(`Proxying request: ${req.method} ${req.originalUrl}`);
+    },
+    onError: (err, req, res) => {
+      console.error("Proxy error:", err);
+      res.status(500).json({ error: "Proxy error" });
     },
   })
 );
+
 app.use("/api/spooners", spoonerRoutes);
 
 mongoose

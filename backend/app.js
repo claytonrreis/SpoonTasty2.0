@@ -44,12 +44,13 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 
+app.use("/api/spooners", spoonerRoutes);
+
 //test for render
 // Proxy middleware to forward API requests that were blocked by cors
-
-app.use("/api/spooners", spoonerRoutes);
 app.get("/api/meals/*", async (req, res) => {
   try {
+    // Build the URL to the external API
     const apiUrl = `https://www.themealdb.com/api/json/v1/1${req.originalUrl.replace(
       "/api/meals",
       ""

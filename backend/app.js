@@ -46,25 +46,21 @@ app.use(cookieParser());
 
 //test for render
 // Proxy middleware to forward API requests that were blocked by cors
-app.use(
-  "/api/meals",
-  createProxyMiddleware({
-    target: "https://www.themealdb.com",
-    changeOrigin: true,
-    pathRewrite: {
-      "^/api/meals": "/api/json/v1/1",
-    },
-    onProxyReq: (proxyReq, req, res) => {
-      console.log(`Proxying request: ${req.method} ${req.originalUrl}`);
-    },
-    onError: (err, req, res) => {
-      console.error("Proxy error:", err);
-      res.status(500).json({ error: "Proxy error" });
-    },
-  })
-);
 
 app.use("/api/spooners", spoonerRoutes);
+app.get("/api/meals/*", async (req, res) => {
+  try {
+    const apiUrl = `https://www.themealdb.com/api/json/v1/1${req.originalUrl.replace(
+      "/api/meals",
+      ""
+    )}`;
+    const response = await axios.get(apiUrl, { params: req.query });
+    res.json(response.data);
+  } catch (error) {
+    console.error("Error proxying request:", error);
+    res.status(500).json({ error: "Proxy error" });
+  }
+});
 
 mongoose
   .connect(

@@ -15,6 +15,8 @@
 // };
 
 //test render
+
+import axios from "axios";
 const API_URL = "/api/meals/";
 
 export const searchMeals = async (query) => {

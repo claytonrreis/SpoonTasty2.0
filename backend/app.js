@@ -52,7 +52,7 @@ app.use(
     target: "https://www.themealdb.com",
     changeOrigin: true,
     pathRewrite: {
-      "^/api/meals": "/api/json/v1/1",
+      "^/api/meals": "/api/json/v1/1", // Rewrite path to the correct API endpoint
     },
     onProxyReq: (proxyReq, req, res) => {
       console.log(`Proxying request: ${req.method} ${req.originalUrl}`);
